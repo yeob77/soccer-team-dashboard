@@ -82,7 +82,7 @@ function FormationManager({ onBack, teamA, teamB }) {
     const resizeCanvas = () => {
       const wrapper = document.querySelector('.soccer-field-wrapper');
       if (wrapper) {
-        canvas.width = wrapper.clientWidth / 2; // 각 필드에 맞게 조정
+        canvas.width = wrapper.clientWidth; // 각 필드에 맞게 조정
         canvas.height = wrapper.clientHeight;
       }
     };
@@ -410,8 +410,6 @@ function FormationManager({ onBack, teamA, teamB }) {
             <canvas
               ref={canvasRef}
               className={`tactic-canvas ${isDrawing.current ? 'drawing' : ''}`}
-              width={document.querySelector('.soccer-field-wrapper')?.clientWidth}
-              height={document.querySelector('.soccer-field-wrapper')?.clientHeight}
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
