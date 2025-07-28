@@ -8,8 +8,9 @@ function FormationManager({ onBack, teamA, teamB }) {
   const [formationName, setFormationName] = useState('');
   const [savedFormations, setSavedFormations] = useState([]);
   const [selectedFormation, setSelectedFormation] = useState('');
-  const [drawingTool, setDrawingTool] = useState('line');
+  const [drawingTool, setDrawingTool] = useState(null);
   const [drawings, setDrawings] = useState([]);
+  const [selectedColor, setSelectedColor] = useState('#ff0000');
   const canvasRef = useRef(null);
   const isDrawing = useRef(false);
   const startPos = useRef({ x: 0, y: 0 });
