@@ -417,7 +417,7 @@ function FormationManager({ onBack, teamA, teamB }) {
           <div className="soccer-field-wrapper">
             <canvas
               ref={canvasRef}
-              className={`tactic-canvas ${isDrawing.current ? 'drawing' : ''}`}
+              className={`tactic-canvas ${drawingTool ? 'drawing' : ''}`}
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
