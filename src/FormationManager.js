@@ -107,8 +107,8 @@ function FormationManager({ onBack, teamA, teamB }) {
       ctx.strokeStyle = drawing.color;
       ctx.lineWidth = drawing.lineWidth || 2;
 
-      // Calculate the offset based on which field the drawing belongs to
-      const fieldOffset = drawing.fieldIndex === 0 ? 0 : canvas.width / 2;
+      // fieldOffset is not needed here if x,y are already absolute canvas coordinates
+      // const fieldOffset = drawing.fieldIndex === 0 ? 0 : canvas.width / 2;
 
       if (drawing.tool === 'freeform') {
         ctx.moveTo(drawing.points[0].x, drawing.points[0].y);
@@ -161,9 +161,8 @@ function FormationManager({ onBack, teamA, teamB }) {
     isDrawing.current = false;
     const { offsetX, offsetY } = e.nativeEvent;
     const fieldIndex = Math.floor(offsetX / (canvas.width / 2));
-    const relativeX = offsetX % (canvas.width / 2);
     if (drawingTool === 'line' || drawingTool === 'arrow') {
-      setDrawings(prev => [...prev, { tool: drawingTool, start: startPos.current, end: { x: relativeX, y: offsetY, fieldIndex }, color: selectedColor }]);
+      setDrawings(prev => [...prev, { tool: drawingTool, start: startPos.current, end: { x: offsetX, y: offsetY, fieldIndex }, color: selectedColor }]);
     }
   };
 
