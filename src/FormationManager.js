@@ -381,9 +381,10 @@ function FormationManager({ onBack, teamA, teamB }) {
           <button onClick={handleDeleteFormation} disabled={!selectedFormation}>삭제</button>
         </div>
         <div className="tactic-board-controls">
-          <button onClick={() => setDrawingTool('line')}>선</button>
-          <button onClick={() => setDrawingTool('arrow')}>화살표</button>
-          <button onClick={() => setDrawingTool('freeform')}>자유 곡선</button>
+          <button onClick={() => setDrawingTool(null)} className={drawingTool === null ? 'active' : ''}>선수 이동</button>
+          <button onClick={() => setDrawingTool('line')} className={drawingTool === 'line' ? 'active' : ''}>선</button>
+          <button onClick={() => setDrawingTool('arrow')} className={drawingTool === 'arrow' ? 'active' : ''}>화살표</button>
+          <button onClick={() => setDrawingTool('freeform')} className={drawingTool === 'freeform' ? 'active' : ''}>자유 곡선</button>
           <input type="color" value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)} />
           <button onClick={handleClearCanvas}>전체 삭제</button>
           <button onClick={handleExportImage}>이미지로 저장</button>
