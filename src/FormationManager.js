@@ -109,8 +109,6 @@ function FormationManager({ onBack, teamA, teamB }) {
 
       // Calculate the offset based on which field the drawing belongs to
       const fieldOffset = drawing.fieldIndex === 0 ? 0 : canvas.width / 2;
-      const drawX = drawing.x - fieldOffset;
-      const drawY = drawing.y;
 
       if (drawing.tool === 'freeform') {
         ctx.moveTo(drawing.points[0].x - fieldOffset, drawing.points[0].y);
