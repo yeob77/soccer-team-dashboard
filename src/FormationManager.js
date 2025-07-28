@@ -59,7 +59,7 @@ function FormationManager({ onBack, teamA, teamB }) {
     if (formation) {
       setFieldPlayersA(formation.fieldPlayersA || {});
       setFieldPlayersB(formation.fieldPlayersB || {});
-      setDrawings(formation.drawings || []);
+      setDrawings(formation.drawings ? formation.drawings.map(d => ({ ...d, color: d.color || '#ff0000' })) : []);
       alert(`'${selectedFormation}' 포메이션을 불러왔습니다.`);
     }
   };
@@ -104,7 +104,7 @@ function FormationManager({ onBack, teamA, teamB }) {
 
     drawings.forEach(drawing => {
       ctx.beginPath();
-      ctx.strokeStyle = drawing.color || '#ff0000';
+      ctx.strokeStyle = drawing.color;
       ctx.lineWidth = drawing.lineWidth || 2;
 
       // Calculate the offset based on which field the drawing belongs to
@@ -231,7 +231,7 @@ function FormationManager({ onBack, teamA, teamB }) {
     // 3. 전술 보드 내용(그림) 겹쳐 그리기
     drawings.forEach(drawing => {
       ctx.beginPath();
-      ctx.strokeStyle = drawing.color || '#ff0000';
+      ctx.strokeStyle = drawing.color;
       ctx.lineWidth = drawing.lineWidth || 2;
       const offsetX = drawing.fieldIndex === 0 ? 0 : exportCanvas.width / 2;
 
