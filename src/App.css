@@ -285,7 +285,7 @@ body {
   align-items: center;
   gap: 1px; /* 요소들 사이 간격 더 줄임 */
   cursor: pointer;
-  font-size: 0.8em; /* 폰트 크기 더 줄임 */
+  font-size: 0.7em; /* 폰트 크기 더 줄임 */
 }
 
 .player-card .player-name {
