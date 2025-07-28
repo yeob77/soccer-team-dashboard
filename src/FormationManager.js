@@ -78,7 +78,6 @@ function FormationManager({ onBack, teamA, teamB }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d'); // eslint-disable-next-line no-unused-vars
 
     const resizeCanvas = () => {
       const wrapper = document.querySelector('.soccer-field-wrapper');
@@ -99,7 +98,7 @@ function FormationManager({ onBack, teamA, teamB }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d'); // eslint-disable-next-line no-unused-vars
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     drawings.forEach(drawing => {
