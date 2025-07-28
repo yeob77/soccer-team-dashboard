@@ -111,19 +111,19 @@ function FormationManager({ onBack, teamA, teamB }) {
       const fieldOffset = drawing.fieldIndex === 0 ? 0 : canvas.width / 2;
 
       if (drawing.tool === 'freeform') {
-        ctx.moveTo(drawing.points[0].x, drawing.points[0].y);
-        drawing.points.forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.moveTo(drawing.points[0].x + fieldOffset, drawing.points[0].y);
+        drawing.points.forEach(p => ctx.lineTo(p.x + fieldOffset, p.y));
       } else if (drawing.tool === 'line') {
-        ctx.moveTo(drawing.start.x, drawing.start.y);
-        ctx.lineTo(drawing.end.x, drawing.end.y);
+        ctx.moveTo(drawing.start.x + fieldOffset, drawing.start.y);
+        ctx.lineTo(drawing.end.x + fieldOffset, drawing.end.y);
       } else if (drawing.tool === 'arrow') {
         const { start, end } = drawing;
-        ctx.moveTo(start.x, start.y);
-        ctx.lineTo(end.x, end.y);
-        const angle = Math.atan2(end.y - start.y, end.x - start.x);
-        ctx.lineTo(end.x - 10 * Math.cos(angle - Math.PI / 6), end.y - 10 * Math.sin(angle - Math.PI / 6));
-        ctx.moveTo(end.x, end.y);
-        ctx.lineTo(end.x - 10 * Math.cos(angle + Math.PI / 6), end.y - 10 * Math.sin(angle + Math.PI / 6));
+        ctx.moveTo(start.x + fieldOffset, start.y);
+        ctx.lineTo(end.x + fieldOffset, end.y);
+        const angle = Math.atan2(end.y - start.y, end.x - start.x); // Simplified angle calculation
+        ctx.lineTo(end.x + fieldOffset - 10 * Math.cos(angle - Math.PI / 6), end.y - 10 * Math.sin(angle - Math.PI / 6));
+        ctx.moveTo(end.x + fieldOffset, end.y);
+        ctx.lineTo(end.x + fieldOffset - 10 * Math.cos(angle + Math.PI / 6), end.y - 10 * Math.sin(angle + Math.PI / 6));
       }
       ctx.stroke();
     });
@@ -131,14 +131,13 @@ function FormationManager({ onBack, teamA, teamB }) {
 
   const handleMouseDown = (e) => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !drawingTool) return; // drawingTool이 null이면 그리기 모드 아님
     isDrawing.current = true;
     const { offsetX, offsetY } = e.nativeEvent;
     const fieldIndex = Math.floor(offsetX / (canvas.width / 2)); // A팀 필드(0) 또는 B팀 필드(1)
-    const relativeX = offsetX % (canvas.width / 2);
-    startPos.current = { x: relativeX, y: offsetY, fieldIndex };
+    startPos.current = { x: offsetX, y: offsetY, fieldIndex };
     if (drawingTool === 'freeform') {
-      setDrawings(prev => [...prev, { tool: 'freeform', points: [startPos.current] }]);
+      setDrawings(prev => [...prev, { tool: 'freeform', points: [startPos.current], color: selectedColor }]);
     }
   };
 
@@ -147,11 +146,10 @@ function FormationManager({ onBack, teamA, teamB }) {
     if (!canvas || !isDrawing.current) return;
     const { offsetX, offsetY } = e.nativeEvent;
     const fieldIndex = Math.floor(offsetX / (canvas.width / 2));
-    const relativeX = offsetX % (canvas.width / 2);
     if (drawingTool === 'freeform') {
       setDrawings(prev => {
         const lastDrawing = prev[prev.length - 1];
-        lastDrawing.points.push({ x: relativeX, y: offsetY, fieldIndex });
+        lastDrawing.points.push({ x: offsetX, y: offsetY, fieldIndex });
         return [...prev.slice(0, -1), lastDrawing];
       });
     }
@@ -163,9 +161,8 @@ function FormationManager({ onBack, teamA, teamB }) {
     isDrawing.current = false;
     const { offsetX, offsetY } = e.nativeEvent;
     const fieldIndex = Math.floor(offsetX / (canvas.width / 2));
-    const relativeX = offsetX % (canvas.width / 2);
     if (drawingTool === 'line' || drawingTool === 'arrow') {
-      setDrawings(prev => [...prev, { tool: drawingTool, start: startPos.current, end: { x: relativeX, y: offsetY, fieldIndex } }]);
+      setDrawings(prev => [...prev, { tool: drawingTool, start: startPos.current, end: { x: offsetX, y: offsetY, fieldIndex }, color: selectedColor }]);
     }
   };
 
@@ -240,13 +237,21 @@ function FormationManager({ onBack, teamA, teamB }) {
         ctx.moveTo(drawing.start.x + offsetX, drawing.start.y);
         ctx.lineTo(drawing.end.x + offsetX, drawing.end.y);
       } else if (drawing.tool === 'arrow') {
+        if (drawing.tool === 'freeform') {
+        ctx.moveTo(drawing.points[0].x + fieldOffset, drawing.points[0].y);
+        drawing.points.forEach(p => ctx.lineTo(p.x + fieldOffset, p.y));
+      } else if (drawing.tool === 'line') {
+        ctx.moveTo(drawing.start.x + fieldOffset, drawing.start.y);
+        ctx.lineTo(drawing.end.x + fieldOffset, drawing.end.y);
+      } else if (drawing.tool === 'arrow') {
         const { start, end } = drawing;
-        ctx.moveTo(start.x + offsetX, start.y);
-        ctx.lineTo(end.x + offsetX, end.y);
+        ctx.moveTo(start.x + fieldOffset, start.y);
+        ctx.lineTo(end.x + fieldOffset, end.y);
         const angle = Math.atan2(end.y - start.y, end.x - start.x);
-        ctx.lineTo(end.x + offsetX - 10 * Math.cos(angle - Math.PI / 6), end.y - 10 * Math.sin(angle - Math.PI / 6));
-        ctx.moveTo(end.x + offsetX, end.y);
-        ctx.lineTo(end.x + offsetX - 10 * Math.cos(angle + Math.PI / 6), end.y - 10 * Math.sin(angle + Math.PI / 6));
+        ctx.lineTo(end.x + fieldOffset - 10 * Math.cos(angle - Math.PI / 6), end.y - 10 * Math.sin(angle - Math.PI / 6));
+        ctx.moveTo(end.x + fieldOffset, end.y);
+        ctx.lineTo(end.x + fieldOffset - 10 * Math.cos(angle + Math.PI / 6), end.y - 10 * Math.sin(angle + Math.PI / 6));
+      }
       }
       ctx.stroke();
     });
