@@ -160,6 +160,15 @@
   z-index: 5;
 }
 
+.tactic-board-controls input[type="color"] {
+  width: 40px;
+  height: 30px;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
 .tactic-canvas.drawing {
   pointer-events: auto; /* 그리기 모드일 때만 이벤트 활성화 */
 }
