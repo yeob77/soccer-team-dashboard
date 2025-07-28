@@ -1,0 +1,157 @@
+/* FormationManager.css */
+
+.formation-manager-container {
+  display: flex;
+  flex-direction: column;
+  height: 95vh;
+  padding: 1rem;
+  background-color: #f0f2f5;
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+.game-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.formation-controls, .tactic-board-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.formation-controls input, .formation-controls select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formation-main {
+  display: flex;
+  flex-grow: 1;
+  gap: 1rem;
+}
+
+.player-pool {
+  width: 180px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.player-pool h3 {
+  text-align: center;
+  margin-top: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.player-pool-teams {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.player-pool-team h4 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.player-pool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.player-tag {
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: grab;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  border: 1px solid;
+}
+
+.player-in-pool.team-A {
+  background-color: #e0f7fa;
+  border-color: #b2ebf2;
+}
+
+.player-in-pool.team-B {
+  background-color: #ffebee;
+  border-color: #ffcdd2;
+}
+
+.soccer-field-wrapper {
+  flex-grow: 1;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.soccer-field {
+  position: relative;
+  background-color: #4CAF50; /* 잔디 색 */
+  background-image:
+    linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 100% 2rem;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.soccer-field h3 {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  background-color: rgba(0,0,0,0.4);
+  padding: 5px 15px;
+  border-radius: 12px;
+  font-size: 1rem;
+}
+
+.player-on-field {
+  position: absolute;
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 0.75rem;
+}
+
+.player-on-field.team-A {
+  background-color: #007bff;
+}
+
+.player-on-field.team-B {
+  background-color: #dc3545;
+}
+
+.tactic-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* 기본적으로는 클릭 이벤트를 무시 */
+  z-index: 5;
+}
+
+.tactic-canvas.drawing {
+  pointer-events: auto; /* 그리기 모드일 때만 이벤트 활성화 */
+}
