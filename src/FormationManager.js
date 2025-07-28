@@ -191,7 +191,7 @@ function FormationManager({ onBack, teamA, teamB }) {
     ctx.fillRect(exportCanvas.width / 2, 0, exportCanvas.width / 2, exportCanvas.height); // B팀 필드
 
     // 2. 필드 위의 선수들 그리기 (원형)
-    ctx.font = "bold 12px Arial";
+    ctx.font = "bold 10px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
@@ -200,14 +200,14 @@ function FormationManager({ onBack, teamA, teamB }) {
       if (player) {
         const { x, y } = fieldPlayersA[playerId];
         ctx.beginPath();
-        ctx.arc(x + 25, y + 25, 25, 0, 2 * Math.PI, false); // 반지름 25로 조정
+        ctx.arc(x + 20, y + 20, 20, 0, 2 * Math.PI, false); // 반지름 20으로 조정
         ctx.fillStyle = '#007bff'; // A팀 색상
         ctx.fill();
         ctx.strokeStyle = 'white';
         ctx.lineWidth = 2;
         ctx.stroke();
         ctx.fillStyle = 'white';
-        ctx.fillText(player.name, x + 25, y + 25);
+        ctx.fillText(player.name, x + 20, y + 20);
       }
     });
 
@@ -216,7 +216,7 @@ function FormationManager({ onBack, teamA, teamB }) {
       if (player) {
         const { x, y } = fieldPlayersB[playerId];
         ctx.beginPath();
-        ctx.arc(x + exportCanvas.width / 2 + 25, y + 25, 25, 0, 2 * Math.PI, false); // 반지름 25로 조정
+        ctx.arc(x + exportCanvas.width / 2 + 20, y + 20, 20, 0, 2 * Math.PI, false); // 반지름 20으로 조정
         ctx.fillStyle = '#dc3545'; // B팀 색상
         ctx.fill();
         ctx.strokeStyle = 'white';

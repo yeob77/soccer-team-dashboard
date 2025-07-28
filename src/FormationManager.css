@@ -41,7 +41,7 @@
 }
 
 .player-pool {
-  width: 120px;
+  width: 100px;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1rem;
@@ -82,7 +82,7 @@
   font-weight: bold;
   color: #333;
   border: 1px solid;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .player-in-pool.team-A {
