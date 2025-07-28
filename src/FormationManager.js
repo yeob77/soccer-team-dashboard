@@ -111,16 +111,16 @@ function FormationManager({ onBack, teamA, teamB }) {
       const fieldOffset = drawing.fieldIndex === 0 ? 0 : canvas.width / 2;
 
       if (drawing.tool === 'freeform') {
-        ctx.moveTo(drawing.points[0].x + fieldOffset, drawing.points[0].y);
-        drawing.points.forEach(p => ctx.lineTo(p.x + fieldOffset, p.y));
+        ctx.moveTo(drawing.points[0].x, drawing.points[0].y);
+        drawing.points.forEach(p => ctx.lineTo(p.x, p.y));
       } else if (drawing.tool === 'line') {
-        ctx.moveTo(drawing.start.x + fieldOffset, drawing.start.y);
-        ctx.lineTo(drawing.end.x + fieldOffset, drawing.end.y);
+        ctx.moveTo(drawing.start.x, drawing.start.y);
+        ctx.lineTo(drawing.end.x, drawing.end.y);
       } else if (drawing.tool === 'arrow') {
         const { start, end } = drawing;
         ctx.moveTo(start.x, start.y);
         ctx.lineTo(end.x, end.y);
-        const angle = Math.atan2(end.y - start.y, end.x - start.x); // Simplified angle calculation
+        const angle = Math.atan2(end.y - start.y, end.x - start.x);
         ctx.lineTo(end.x - 10 * Math.cos(angle - Math.PI / 6), end.y - 10 * Math.sin(angle - Math.PI / 6));
         ctx.moveTo(end.x, end.y);
         ctx.lineTo(end.x - 10 * Math.cos(angle + Math.PI / 6), end.y - 10 * Math.sin(angle + Math.PI / 6));
@@ -161,8 +161,9 @@ function FormationManager({ onBack, teamA, teamB }) {
     isDrawing.current = false;
     const { offsetX, offsetY } = e.nativeEvent;
     const fieldIndex = Math.floor(offsetX / (canvas.width / 2));
+    const relativeX = offsetX % (canvas.width / 2);
     if (drawingTool === 'line' || drawingTool === 'arrow') {
-      setDrawings(prev => [...prev, { tool: drawingTool, start: startPos.current, end: { x: offsetX, y: offsetY, fieldIndex }, color: selectedColor }]);
+      setDrawings(prev => [...prev, { tool: drawingTool, start: startPos.current, end: { x: relativeX, y: offsetY, fieldIndex }, color: selectedColor }]);
     }
   };
 
@@ -237,7 +238,7 @@ function FormationManager({ onBack, teamA, teamB }) {
         ctx.moveTo(drawing.start.x + offsetX, drawing.start.y);
         ctx.lineTo(drawing.end.x + offsetX, drawing.end.y);
       } else if (drawing.tool === 'arrow') {
-        if (drawing.tool === 'freeform') {
+      if (drawing.tool === 'freeform') {
         ctx.moveTo(drawing.points[0].x, drawing.points[0].y);
         drawing.points.forEach(p => ctx.lineTo(p.x, p.y));
       } else if (drawing.tool === 'line') {
