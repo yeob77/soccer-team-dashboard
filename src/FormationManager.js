@@ -234,8 +234,8 @@ function FormationManager({ onBack, teamA, teamB }) {
         ctx.moveTo(drawing.points[0].x + offsetX, drawing.points[0].y);
         drawing.points.forEach(p => ctx.lineTo(p.x + offsetX, p.y));
       } else if (drawing.tool === 'line') {
-        ctx.moveTo(drawing.start.x + offsetX, drawing.start.y);
-        ctx.lineTo(drawing.end.x + offsetX, drawing.end.y);
+        ctx.moveTo(drawing.start.x, drawing.start.y);
+        ctx.lineTo(drawing.end.x, drawing.end.y);
       } else if (drawing.tool === 'arrow') {
       if (drawing.tool === 'freeform') {
         ctx.moveTo(drawing.points[0].x, drawing.points[0].y);

@@ -371,7 +371,7 @@ function App() {
               </div>
             </Modal>
             {(teamA.length > 0 || teamB.length > 0) && (
-              <TeamDisplay teamA={teamA} teamB={teamB} />
+              <TeamDisplay teamA={teamA} teamB={teamB} setTeamA={setTeamA} setTeamB={setTeamB} />
             )}
           </>
         ) : (
