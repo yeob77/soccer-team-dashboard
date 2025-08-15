@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/soccer-team-dashboard/static/css/main.d636eea2.css",
+    "main.js": "/soccer-team-dashboard/static/js/main.4f0932d8.js",
+    "static/js/453.fd1a7d18.chunk.js": "/soccer-team-dashboard/static/js/453.fd1a7d18.chunk.js",
+    "index.html": "/soccer-team-dashboard/index.html",
+    "main.d636eea2.css.map": "/soccer-team-dashboard/static/css/main.d636eea2.css.map",
+    "main.4f0932d8.js.map": "/soccer-team-dashboard/static/js/main.4f0932d8.js.map",
+    "453.fd1a7d18.chunk.js.map": "/soccer-team-dashboard/static/js/453.fd1a7d18.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d636eea2.css",
+    "static/js/main.4f0932d8.js"
+  ]
+}
